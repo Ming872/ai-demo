@@ -1,0 +1,3 @@
+﻿2026-06-30 14:21:08.332 INFO traceId=tr-inv-2901 service=finance-invoice-service operator=chenli api="POST /api/finance/invoices/INV20260630007/certify" message="certifyInvoice start"
+2026-06-30 14:21:08.618 ERROR traceId=tr-inv-2901 service=finance-invoice-service errorCode=TAX-401 message="tax bureau token expired invoiceNo=INV20260630007"
+2026-06-30 14:21:09.006 WARN traceId=tr-inv-2901 service=finance-invoice-service message="certifyInvoice failed and queued for retry invoiceNo=INV20260630007"

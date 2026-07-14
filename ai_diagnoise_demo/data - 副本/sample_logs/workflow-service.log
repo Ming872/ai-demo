@@ -1,0 +1,3 @@
+﻿2026-06-30 15:05:49.120 INFO traceId=tr-wf-5510 service=workflow-service operator=wangwu api="POST /api/purchase/orders/PO202606300016/approve" message="approvePurchaseOrder start"
+2026-06-30 15:05:49.762 ERROR traceId=tr-wf-5510 service=workflow-service errorCode=WF-409 message="current user is not active approver orderNo=PO202606300016"
+2026-06-30 15:07:22.821 INFO traceId=tr-wf-5519 service=workflow-service message="approvePurchaseOrder success orderNo=PO202606300017"

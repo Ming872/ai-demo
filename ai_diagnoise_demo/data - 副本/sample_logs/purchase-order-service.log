@@ -1,0 +1,6 @@
+﻿2026-06-30 15:06:11.214 INFO traceId=tr-po-8821 service=purchase-order-service operator=zhangsan api="POST /api/purchase/orders/PO202606300018/submit" message="submitPurchaseOrder start orderNo=PO202606300018"
+2026-06-30 15:06:11.438 INFO traceId=tr-po-8821 service=purchase-order-service message="validate supplier status supplierCode=S1024 result=ACTIVE"
+2026-06-30 15:06:12.019 ERROR traceId=tr-po-8821 service=purchase-order-service errorCode=INV-503 message="Inventory center timeout when reserving stock orderNo=PO202606300018 sku=MAT-7788"
+2026-06-30 15:06:12.026 ERROR traceId=tr-po-8821 service=purchase-order-service exception="com.demo.InventoryTimeoutException: reserveStock timeout after 3000ms"
+2026-06-30 15:06:12.033 WARN traceId=tr-po-8821 service=purchase-order-service message="transaction rolled back orderNo=PO202606300018 reason=InventoryTimeoutException"
+2026-06-30 16:44:35.091 INFO traceId=tr-po-9132 service=purchase-order-service operator=lisi api="POST /api/purchase/orders/PO202606300099/submit" message="submitPurchaseOrder success"

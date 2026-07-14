@@ -1,0 +1,57 @@
+﻿[
+  {
+    "system_name": "采购管理系统",
+    "menu_path": "采购管理 > 采购订单 > 订单提交",
+    "page_name": "采购订单提交页",
+    "button_name": "提交",
+    "api": "POST /api/purchase/orders/{orderNo}/submit",
+    "backend_service": "purchase-order-service",
+    "service": "PurchaseOrderSubmitService",
+    "trace_keyword": "submitPurchaseOrder",
+    "keywords": ["采购订单", "提交", "PO", "库存校验", "供应商"]
+  },
+  {
+    "system_name": "采购管理系统",
+    "menu_path": "采购管理 > 采购订单 > 审批",
+    "page_name": "采购订单审批页",
+    "button_name": "审批通过",
+    "api": "POST /api/purchase/orders/{orderNo}/approve",
+    "backend_service": "workflow-service",
+    "service": "PurchaseApprovalService",
+    "trace_keyword": "approvePurchaseOrder",
+    "keywords": ["采购订单", "审批", "流程", "审批人"]
+  },
+  {
+    "system_name": "销售管理系统",
+    "menu_path": "销售管理 > 销售订单 > 发货确认",
+    "page_name": "销售订单发货页",
+    "button_name": "确认发货",
+    "api": "POST /api/sales/orders/{orderNo}/ship",
+    "backend_service": "sales-fulfillment-service",
+    "service": "ShipmentConfirmService",
+    "trace_keyword": "confirmShipment",
+    "keywords": ["销售订单", "发货", "库存", "SO"]
+  },
+  {
+    "system_name": "财务共享系统",
+    "menu_path": "应付管理 > 发票池 > 发票认证",
+    "page_name": "发票认证页",
+    "button_name": "认证",
+    "api": "POST /api/finance/invoices/{invoiceNo}/certify",
+    "backend_service": "finance-invoice-service",
+    "service": "InvoiceCertifyService",
+    "trace_keyword": "certifyInvoice",
+    "keywords": ["发票", "认证", "税号", "AP"]
+  },
+  {
+    "system_name": "主数据平台",
+    "menu_path": "客户主数据 > 客户档案 > 保存",
+    "page_name": "客户档案编辑页",
+    "button_name": "保存",
+    "api": "PUT /api/mdm/customers/{customerCode}",
+    "backend_service": "mdm-customer-service",
+    "service": "CustomerProfileService",
+    "trace_keyword": "saveCustomerProfile",
+    "keywords": ["客户", "主数据", "保存", "MDM"]
+  }
+]

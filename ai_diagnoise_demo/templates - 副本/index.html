@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 报错诊断助手</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<main class="console">
+  <header class="console__header">
+    <div class="console__title">
+      <span class="status-dot" id="status-dot"></span>
+      <div>
+        <h1>AI 报错诊断助手</h1>
+        <p>截图识别、接口映射、日志关联、根因分析</p>
+      </div>
+    </div>
+    <span class="console__status" id="status-text">待上传</span>
+  </header>
+
+  <section class="knowledge-strip" aria-label="知识库状态">
+    <div>
+      <strong>{{ mapping_count }}</strong>
+      <span>页面接口映射</span>
+    </div>
+    <div>
+      <strong>{{ log_source_count }}</strong>
+      <span>日志源配置</span>
+    </div>
+    <div>
+      <strong>30min</strong>
+      <span>默认日志窗口</span>
+    </div>
+  </section>
+
+  <form id="analyze-form" class="diagnosis-form">
+    <section class="form-panel" aria-label="报错上下文">
+      <div class="form-grid">
+        <label>
+          <span>系统名称</span>
+          <input name="system_name" id="system-name" placeholder="例如：采购管理系统" autocomplete="off">
+        </label>
+        <label>
+          <span>系统菜单</span>
+          <input name="menu_path" id="menu-path" placeholder="例如：采购管理 > 采购订单 > 订单提交" autocomplete="off">
+        </label>
+        <label>
+          <span>报错时间</span>
+          <input type="datetime-local" name="error_time" id="error-time">
+        </label>
+        <label>
+          <span>操作人账号</span>
+          <input name="operator" id="operator" placeholder="例如：zhangsan" autocomplete="off">
+        </label>
+        <label>
+          <span>单据号</span>
+          <input name="document_no" id="document-no" placeholder="例如：PO202606300018" autocomplete="off">
+        </label>
+        <label class="form-grid__wide">
+          <span>操作步骤</span>
+          <textarea name="operation_steps" id="operation-steps" rows="3" placeholder="例如：打开采购订单，点击提交后弹出库存中心超时"></textarea>
+        </label>
+      </div>
+    </section>
+
+    <div class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="选择或拖入报错截图">
+      <input type="file" name="image" id="file-input" accept="image/png,image/jpeg,image/webp" hidden required>
+
+      <div class="dropzone__empty" id="dropzone-empty">
+        <div class="dropzone__icon" aria-hidden="true">IMG</div>
+        <p><strong>点击选择报错截图</strong>，或将图片拖拽到此处</p>
+        <p class="dropzone__meta">支持 PNG / JPG / WEBP，单文件不超过 8MB</p>
+      </div>
+
+      <div class="dropzone__preview" id="dropzone-preview" hidden>
+        <div class="preview-frame">
+          <img id="preview-img" alt="截图预览">
+          <div class="scan-line" id="scan-line" hidden></div>
+        </div>
+        <div class="preview-meta">
+          <span id="preview-filename"></span>
+          <button type="button" class="btn-link" id="remove-file">移除</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="submit" class="btn-primary" id="submit-btn" disabled>
+        <span id="submit-label">开始诊断</span>
+      </button>
+      <button type="button" class="btn-secondary" id="save-case-btn" hidden>确认并沉淀案例</button>
+      <p class="error-msg" id="error-msg" hidden></p>
+    </div>
+  </form>
+
+  <section class="results" id="results" hidden aria-live="polite">
+    <div class="results__header">
+      <h2>诊断结果</h2>
+      <span class="results__mode" id="results-mode"></span>
+    </div>
+    <div class="results__list" id="results-list"></div>
+  </section>
+</main>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

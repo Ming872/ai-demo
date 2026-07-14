@@ -1,0 +1,29 @@
+﻿[
+  {
+    "system_name": "采购管理系统",
+    "service": "purchase-order-service",
+    "server": "10.10.18.21",
+    "path": "/var/log/purchase-order-service/app.log",
+    "local_path": "data/sample_logs/purchase-order-service.log",
+    "format": "yyyy-MM-dd HH:mm:ss.SSS level traceId service message",
+    "encoding": "utf-8"
+  },
+  {
+    "system_name": "采购管理系统",
+    "service": "workflow-service",
+    "server": "10.10.18.33",
+    "path": "/var/log/workflow-service/app.log",
+    "local_path": "data/sample_logs/workflow-service.log",
+    "format": "yyyy-MM-dd HH:mm:ss.SSS level traceId service message",
+    "encoding": "utf-8"
+  },
+  {
+    "system_name": "财务共享系统",
+    "service": "finance-invoice-service",
+    "server": "10.10.22.15",
+    "path": "/var/log/finance-invoice-service/app.log",
+    "local_path": "data/sample_logs/finance-invoice-service.log",
+    "format": "yyyy-MM-dd HH:mm:ss.SSS level traceId service message",
+    "encoding": "utf-8"
+  }
+]
