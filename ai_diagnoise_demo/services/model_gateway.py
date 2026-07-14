@@ -26,6 +26,7 @@ class ModelGateway:
     def __init__(self) -> None:
         self.provider = os.getenv("AI_PROVIDER", "deepseek").lower()
         self.model = os.getenv("MODEL_GATEWAY_MODEL") or "deepseek-chat"
+        self.vision_model = os.getenv("DEEPSEEK_VISION_MODEL") or os.getenv("MODEL_GATEWAY_MODEL") or "deepseek-vl2"
         self.max_tokens = int(os.getenv("MODEL_GATEWAY_MAX_TOKENS", str(DEFAULT_MAX_TOKENS)))
 
     def analyze_image(self, image_path: str | Path, prompt_text: str, media_type: str = "image/png") -> str:
@@ -41,7 +42,7 @@ class ModelGateway:
 
         image_data_url = f"data:{media_type};base64,{encode_image(image_path)}"
         payload = {
-            "model": self.model,
+            "model": self.vision_model,
             "max_tokens": self.max_tokens,
             "messages": [
                 {
@@ -66,6 +67,16 @@ class ModelGateway:
         try:
             with urllib.request.urlopen(request, timeout=90) as response:
                 data = json.loads(response.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            body = exc.read().decode("utf-8", errors="replace")
+            detail = body
+            try:
+                detail = json.loads(body).get("error", {}).get("message", body)
+            except (TypeError, ValueError, AttributeError):
+                pass
+            if exc.code == 402:
+                raise ModelGatewayError(f"DeepSeek gateway error: insufficient balance. {detail}") from exc
+            raise ModelGatewayError(f"DeepSeek gateway error: HTTP {exc.code}. {detail}") from exc
         except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
             raise ModelGatewayError(f"DeepSeek gateway error: {exc}") from exc
 
